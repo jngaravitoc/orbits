@@ -73,11 +73,19 @@ mbulge: 1
 #Scale length of the bulge
 rhdisk: 0.7
 
-#Free Host(0) , Fixed Host to a [0, 0, 0] point (1)
-hostmove: 0
+#Fixed Host(0) at a point [0,0,0] , Free Host(1)
+hostmove: 1
 
 #Dynamical friction alpha parameter
 alpha: 1
 
 #Dynamical friction for the host (no=0, yes=1)
 hostdf: 1
+
+# Time of integration in Gyrs
+
+time: 2.5
+
+# Forward integration (1), backwards integration(-1)
+
+direction: -1

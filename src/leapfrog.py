@@ -1,35 +1,20 @@
 import numpy as np
 from astropy import units, constants
 from acceleration import *
+from parameters import *
 
-def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_sat, Rvir):
-
-    n_points = 2500
-    h = 0.001
-    # Creating the arrays to collect the data in each step of the integration
-    # the imput units should be in Kpc for positions and km/s for velocities
-
-    # Coordinates tranformation
-
-    vx_ic = vx_ic * units.km / units.s
-    vy_ic = vy_ic * units.km / units.s
-    vz_ic = vz_ic * units.km / units.s
-    vx_ic = vx_ic.to(units.kpc / units.Gyr)
-    vy_ic = vy_ic.to(units.kpc / units.Gyr)
-    vz_ic = vz_ic.to(units.kpc / units.Gyr)
-    vx_ic = vx_ic.value
-    vy_ic = vy_ic.value
-    vz_ic = vz_ic.value
+def leapfrog():
+    h = 0.001 * direction
+    n_points = time * 1000.0
 
     t = np.zeros(n_points)
-    x = np.zeros(n_points) #+ x_ic
-    y = np.zeros(n_points) #+ y_ic
-    z = np.zeros(n_points) #+ z_ic
+    x = np.zeros(n_points)
+    y = np.zeros(n_points)
+    z = np.zeros(n_points)
 
     x_mw = np.zeros(n_points)
     y_mw = np.zeros(n_points)
     z_mw = np.zeros(n_points)
-
 
     vx = np.zeros(n_points)
     vy = np.zeros(n_points)
@@ -39,53 +24,43 @@ def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_s
     vy_mw  = np.zeros(n_points)
     vz_mw  = np.zeros(n_points)
 
-    vx_ic_MW = 0 * units.km / units.s
-    vy_ic_MW = 0 * units.km / units.s
-    vz_ic_MW = 0 * units.km / units.s
-
-    vx_ic_MW = vx_ic_MW.to(units.kpc / units.Gyr)
-    vy_ic_MW = vy_ic_MW.to(units.kpc / units.Gyr)
-    vz_ic_MW = vz_ic_MW.to(units.kpc / units.Gyr)
-
     ax = np.zeros(n_points)
     ay = np.zeros(n_points)
     az = np.zeros(n_points)
 
-    ax_mw = np.zeros(n_points)
-    ay_mw = np.zeros(n_points)
-    az_mw = np.zeros(n_points)
+    ax_mw  = np.zeros(n_points)
+    ay_mw  = np.zeros(n_points)
+    az_mw  = np.zeros(n_points)
 
     t[0] = 0
 
-    # This initial conditions come form MW.py, the units are Kpc and Gyr
-    x[0] = x_ic
-    y[0] = y_ic
-    z[0] = z_ic
+    x[0] = x_sat
+    y[0] = y_sat
+    z[0] = z_sat
 
-    x_mw[0] = 0
-    y_mw[0] = 0
-    z_mw[0] = 0
+    x_mw[0] = x_host
+    y_mw[0] = y_host
+    z_mw[0] = z_host
 
-    vx[0] = vx_ic
-    vy[0] = vy_ic
-    vz[0] = vz_ic
+    vx[0] = vx_sat
+    vy[0] = vy_sat
+    vz[0] = vz_sat
 
-    vx_mw[0] = vx_ic_MW.value
-    vy_mw[0] = vy_ic_MW.value
-    vz_mw[0] = vz_ic_MW.value
+    vx_mw[0] = vx_host
+    vy_mw[0] = vy_host
+    vz_mw[0] = vz_host
 
-    ax[0] = acceleration((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]), M_halo, M_disk, M_bulge, M_sat, Rvir)[0]
-    ay[0] = acceleration((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]), M_halo, M_disk, M_bulge, M_sat, Rvir)[1]
-    az[0] = acceleration((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]), M_halo, M_disk, M_bulge, M_sat, Rvir)[2]
+    ax[0] = acc_sat((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]))[0]
+    ay[0] = acc_sat((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]))[1]
+    az[0] = acc_sat((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]), (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]))[2]
 
-    ax_mw[0] = acceleration_mw((x_mw[0]-x[0]),-(y[0] - y_mw[0]), -(z[0] - z_mw[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]), M_sat, M_halo)[0]
-    ay_mw[0] = acceleration_mw((x_mw[0]-x[0]),-(y[0] - y_mw[0]), -(z[0] - z_mw[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]), M_sat, M_halo)[1]
-    az_mw[0] = acceleration_mw((x_mw[0]-x[0]),-(y[0] - y_mw[0]), -(z[0] - z_mw[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]), M_sat, M_halo)[2]
-
+    ax_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] - z[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[0]
+    ay_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] - z[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[1]
+    az_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] - z[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[2]
 
     # one half step
-    # at the first step the MW is at 0, 0, 0 and its not moving
-
+    # Here I assume the host galaxy is at (0, 0, 0) and then its
+    # initial v[1] is (0, 0, 0)
     t[1] = t[0] - h
     x[1] = x[0] - h * vx[0]
     y[1] = y[0] - h * vy[0]
@@ -94,7 +69,8 @@ def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_s
     vx[1] = vx[0] - h * ax[0]
     vy[1] = vy[0] - h * ay[0]
     vz[1] = vz[0] - h * az[0]
-    if (mw=='free'):
+
+    if (Host_move==1):
         x_mw[1] = x_mw[0] - h * vx_mw[0]
         y_mw[1] = y_mw[0] - h * vy_mw[0]
         z_mw[1] = z_mw[0] - h * vz_mw[0]
@@ -103,17 +79,15 @@ def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_s
         vy_mw[1] = vy_mw[0] - h * ay_mw[0]
         vz_mw[1] = vz_mw[0] - h * az_mw[0]
 
-        ax_mw[1] = acceleration_mw(-(x[1] - x_mw[1]), -(y[1] - y_mw[1]), -(z[1] - z_mw[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]), M_sat, M_halo)[0]
-        ay_mw[1] = acceleration_mw(-(x[1] - x_mw[1]), -(y[1] - y_mw[1]), -(z[1] - z_mw[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]), M_sat, M_halo)[1]
-        az_mw[1] = acceleration_mw(-(x[1] - x_mw[1]), -(y[1] - y_mw[1]), -(z[1] - z_mw[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]), M_sat, M_halo)[2]
+        ax_mw[1] = acc_host((x_mw[1] - x[1]), (y_mw[1] - y[1]), (z_mw[1] - z[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]))[0]
+        ay_mw[1] = acc_host((x_mw[1] - x[1]), (y_mw[1] - y[1]), (z_mw[1] - z[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]))[1]
+        az_mw[1] = acc_host((x_mw[1] - x[1]), (y_mw[1] - y[1]), (z_mw[1] - z[1]), (vx_mw[1] - vx[1]), (vy_mw[1] - vy[1]), (vz_mw[1] - vz[1]))[2]
 
+    ax[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[0]
+    ay[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[1]
+    az[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[2]
 
-
-    ax[1] = acceleration(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1], M_halo, M_disk, M_bulge, M_sat, Rvir)[0]
-    ay[1] = acceleration(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1], M_halo, M_disk, M_bulge, M_sat, Rvir)[1]
-    az[1] = acceleration(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1], M_halo, M_disk, M_bulge, M_sat, Rvir)[2]
-
-    for i in range(2,n_points):
+    for i in range(2, int(n_points)):
         t[i] = t[i-1] - h
 
         x[i] = x[i-2] - 2 * h * vx[i-1]
@@ -124,7 +98,7 @@ def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_s
         vy[i] = vy[i-2] - 2 * h * ay[i-1]
         vz[i] = vz[i-2] - 2 * h * az[i-1]
 
-        if (mw=='free'):
+        if (Host_move==1):
             x_mw[i] = x_mw[i-2] - 2 * h * vx_mw[i-1]
             y_mw[i] = y_mw[i-2] - 2 * h * vy_mw[i-1]
             z_mw[i] = z_mw[i-2] - 2 * h * vz_mw[i-1]
@@ -133,14 +107,12 @@ def leapfrog(x_ic, y_ic, z_ic, vx_ic, vy_ic, vz_ic, M_halo, M_disk, M_bulge, M_s
             vy_mw[i] = vy_mw[i-2] - 2 * h * ay_mw[i-1]
             vz_mw[i] = vz_mw[i-2] - 2 * h * az_mw[i-1]
 
+            ax_mw[i] = acc_host((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]))[0]
+            ay_mw[i] = acc_host((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]))[1]
+            az_mw[i] = acc_host((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]))[2]
 
-            ax_mw[i] = acceleration_mw((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]), M_sat, M_halo)[0]
-            ay_mw[i] = acceleration_mw((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]), M_sat, M_halo)[1]
-            az_mw[i] = acceleration_mw((x_mw[i]-x[i]), (y_mw[i] - y[i]), (z_mw[i]-z[i]), (vx_mw[i] - vx[i]), (vy_mw[i] - vy[i]), (vz_mw[i] - vz[i]), M_sat, M_halo)[2]
+        ax[i] = acc_sat(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1])[0]
+        ay[i] = acc_sat(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1])[1]
+        az[i] = acc_sat(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1])[2]
 
-
-            ax[i] = acceleration(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1], M_halo, M_disk, M_bulge, M_sat, Rvir)[0]
-            ay[i] = acceleration(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1], M_halo, M_disk, M_bulge, M_sat, Rvir)[1]
-            az[i] = acceleration(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1], M_halo, M_disk, M_bulge, M_sat, Rvir)[2]
-
-        return t, x, y, z, x_mw, y_mw, z_mw, vx, vy, vz, vx_mw, vy_mw, vz_mw, ax, ay, az, ax_mw, ay_mw, az_mw
+        return t, x, y, z, x_mw, y_mw, z_mw, vx, vy, vz, vx_mw, vy_mw, vz_mw

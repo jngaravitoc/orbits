@@ -11,10 +11,8 @@ from astropy import constants
 from astropy import units
 from cosmotools import *
 
-G = constants.G
+
 K = constants.k_B
-G = G.to(units.kiloparsec**3 / (units.Msun * units.s**2)) 
-G1 = G.to(units.kpc * units.m**2 /( units.Msun * units.s**2) )
 K = K.to(units.Msun * units.kpc**2 / (units.s**2 * units.Kelvin))
 
 
@@ -105,9 +103,9 @@ def a_hernquist(a, x, y, z, M):
     z = z * units.kpc
     r = np.sqrt(x**2 + y**2 + z**2)
     M = M * units.Msun
-    Ax =  - 1.0 * x * G1 * M / ( r * (r + a)**2)
-    Ay =  - 1.0 * y * G1 * M / ( r * (r + a)**2)
-    Az =  - 1.0 * z * G1 * M / ( r * (r + a)**2)
+    Ax =  - 1.0 * x * G * M / ( r * (r + a)**2)
+    Ay =  - 1.0 * y * G * M / ( r * (r + a)**2)
+    Az =  - 1.0 * z * G * M / ( r * (r + a)**2)
     Ax = Ax.to(units.km / units.s**2) 
     Ay = Ay.to(units.km / units.s**2)
     Az = Az.to(units.km / units.s**2)
