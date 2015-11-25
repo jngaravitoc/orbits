@@ -2,7 +2,7 @@ import numpy as np
 from astropy import units, constants
 from profiles import *
 
-def acceleration(x, y, z, vx, vy, vz, M_halo, M_disk, M_bulge, M_sat, Rvir):
+def acc_sat(x, y, z, vx, vy, vz, M_halo, M_disk, M_bulge, M_sat, Rvir):
     c = Rvir / rs
     ahalo = a_NFWnRvir(c, x, y, z, M_halo, Rvir)
     adisk = a_mn(ra, rb, x, y, z, M_disk)
@@ -34,7 +34,7 @@ def acceleration(x, y, z, vx, vy, vz, M_halo, M_disk, M_bulge, M_sat, Rvir):
         Az = Az.value
     return Ax, Ay, Az
 
-def acceleration_mw(x, y, z, vx, vy, vz, M_sat, M_halo):
+def acc_host(x, y, z, vx, vy, vz, M_sat, M_halo):
     M_halo = M_halo * units.Msun
     M_sat = M_sat * units.Msun
     r = np.sqrt(x**2 + y**2 + z**2)
