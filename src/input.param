@@ -4,6 +4,10 @@
 # the name of the value.
 ###########################################
 [params]
+# output file path
+path: ./
+# output filename
+filename: test
 #x-initial position of the satellite [kpc]
 xsat: 80
 
@@ -26,7 +30,7 @@ vzsat: 80
 msat: 10
 
 #Virial radius of the satellite [kpc]
-rvirsat: 261
+rvirsat: 50
 
 #concentration parameter of the satellite
 csat: 10

@@ -2,7 +2,7 @@ import numpy as np
 from astropy import units, constants
 from profiles import *
 from parameters import *
-from dynamical_friction import df
+from dynamical_friction import *
 
 def acc_sat(x, y, z, vx, vy, vz):
     ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
@@ -19,8 +19,8 @@ def acc_sat(x, y, z, vx, vy, vz):
     # Truncating the halo at the virial radius
 
     if (r <= Rvir_host):
-        a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat,
-Rvir_host, c_host)
+        a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat, \
+                              Rvir_host, c_host)
         Ax = ax.value + a_dfx
         Ay = ay.value + a_dfy
         Az = az.value + a_dfz
@@ -47,9 +47,12 @@ def acc_host(x, y, z, vx, vy, vz):
     Ay = Ay.to(units.kpc / units.Gyr**2)
     Az = Az.to(units.kpc / units.Gyr**2)
 
+    Ax = Ax.value
+    Ay = Ay.value
+    Az = Az.value
     if (r <= Rvir_sat):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_host, Rvir_sat, c_sat)
-        Ax = Ax.value + a_dfx
-        Ay = Ay.value + a_dfy
-        Az = Az.value + a_dfz
+        Ax = Ax + a_dfx
+        Ay = Ay + a_dfy
+        Az = Az + a_dfz
     return Ax, Ay, Az

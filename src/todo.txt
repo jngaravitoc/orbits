@@ -1,0 +1,6 @@
+0. Check units of everything
+1. Generalize to a starting host galaxy not at 0,0,0
+2. function that prints a file.
+3. plotting code
+4. print input params
+5. check df of ost galaxy

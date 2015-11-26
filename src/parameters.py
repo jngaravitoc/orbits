@@ -27,6 +27,8 @@ def ConfigSectionMap(section):
 # factor to convert from km/s to kpc/Gyr
 conv_factor = 1.0227121650537077
 
+path = str(ConfigSectionMap("params")['path'])
+filename = str(ConfigSectionMap("params")['filename'])
 x_sat = float(ConfigSectionMap("params")['xsat'])
 y_sat = float(ConfigSectionMap("params")['ysat'])
 z_sat = float(ConfigSectionMap("params")['vzsat'])

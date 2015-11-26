@@ -33,7 +33,6 @@ def leapfrog():
     az_mw  = np.zeros(n_points)
 
     t[0] = 0
-
     x[0] = x_sat
     y[0] = y_sat
     z[0] = z_sat
@@ -58,8 +57,8 @@ def leapfrog():
     ay_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] - z[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[1]
     az_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] - z[0]), (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[2]
 
-    # one half step
-    # Here I assume the host galaxy is at (0, 0, 0) and then its
+    # half step
+    # Here I assume the host galaxy starts at position (0, 0, 0) and then its
     # initial v[1] is (0, 0, 0)
     t[1] = t[0] - h
     x[1] = x[0] - h * vx[0]
@@ -87,9 +86,8 @@ def leapfrog():
     ay[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[1]
     az[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[2]
 
-    for i in range(2, int(n_points)):
+    for i in range(2, 2500):
         t[i] = t[i-1] - h
-
         x[i] = x[i-2] - 2 * h * vx[i-1]
         y[i] = y[i-2] - 2 * h * vy[i-1]
         z[i] = z[i-2] - 2 * h * vz[i-1]
@@ -115,4 +113,4 @@ def leapfrog():
         ay[i] = acc_sat(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1])[1]
         az[i] = acc_sat(x[i-1]-x_mw[i-1], y[i-1]-y_mw[i-1], z[i-1]-z_mw[i-1], vx[i-1]-vx_mw[i-1], vy[i-1]-vy_mw[i-1], vz[i-1]-vz_mw[i-1])[2]
 
-        return t, x, y, z, x_mw, y_mw, z_mw, vx, vy, vz, vx_mw, vy_mw, vz_mw
+    return t, x, y, z, x_mw, y_mw, z_mw, vx, vy, vz, vx_mw, vy_mw, vz_mw
