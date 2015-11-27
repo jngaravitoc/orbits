@@ -35,7 +35,6 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     v = np.sqrt(vx**2 + vy**2 + vz**2)
     # Density of the NFW at a given r
     rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
-    rho = rho.value
     # Mass of the satellite
     # Computing the dynamical friction
     factor = - 4 * np.pi * G**2
@@ -48,5 +47,6 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     a_dfx = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vx) / v**3.0
     a_dfy = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vy) / v**3.0
     a_dfz = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
-    # Transforming to the right units
+    # Units
+    # kpc/Gyr2
     return a_dfx, a_dfy, a_dfz

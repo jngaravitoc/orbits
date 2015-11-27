@@ -11,9 +11,6 @@ def acc_sat(x, y, z, vx, vy, vz):
     ax = ahalo[0] + adisk[0] + abulge[0]
     ay = ahalo[1] + adisk[1] + abulge[1]
     az = ahalo[2] + adisk[2] + abulge[2]
-    ax = ax.to(units.kpc/units.Gyr**2)
-    ay = ay.to(units.kpc/units.Gyr**2)
-    az = az.to(units.kpc/units.Gyr**2)
     r = np.sqrt(x**2 + y**2 + z**2)
 
     # Truncating the halo at the virial radius
@@ -21,9 +18,9 @@ def acc_sat(x, y, z, vx, vy, vz):
     if (r <= Rvir_host):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat, \
                               Rvir_host, c_host)
-        Ax = ax.value + a_dfx
-        Ay = ay.value + a_dfy
-        Az = az.value + a_dfz
+        Ax = ax + a_dfx
+        Ay = ay + a_dfy
+        Az = az + a_dfz
     else:
         Mtot = (M_host + M_disk + M_bulge) * units.Msun
         Ax = - G * Mtot * x * units.kpc / (r*units.kpc)**3
@@ -43,13 +40,6 @@ def acc_host(x, y, z, vx, vy, vz):
     Ay =  a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)[1]
     Az =  a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)[2]
 
-    Ax = Ax.to(units.kpc / units.Gyr**2)
-    Ay = Ay.to(units.kpc / units.Gyr**2)
-    Az = Az.to(units.kpc / units.Gyr**2)
-
-    Ax = Ax.value
-    Ay = Ay.value
-    Az = Az.value
     if (r <= Rvir_sat):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_host, Rvir_sat, c_sat)
         Ax = Ax + a_dfx
