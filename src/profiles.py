@@ -224,8 +224,6 @@ def a_mn(a, b, x, y, z, M):
     Ax = -  x * G * M / (R**2 + (a + np.sqrt( z**2 + b**2))**2)**(3.0/2.0)
     Ay = -  y * G * M / (R**2 + (a + np.sqrt( z**2 + b**2))**2)**(3.0/2.0)
     Az = -  z * G * M * (a + np.sqrt(z**2 + b**2)) / ((R**2 + (a + np.sqrt(z**2 + b**2))**2)**(3.0/2.0) * np.sqrt(z**2 + b**2))
-    Ar = Ar.to(units.km / units.s**2)
-    Az = Az.to(units.km / units.s**2)
     return Ax.value, Ay.value, Az.value
 
 #+++++++++++++++++++++++++ NFW +++++++++++++++++++++++++++

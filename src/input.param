@@ -5,7 +5,7 @@
 ###########################################
 [params]
 # output file path
-path: ./
+path: ../data/
 # output filename
 filename: test
 #x-initial position of the satellite [kpc]
