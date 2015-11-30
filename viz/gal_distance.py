@@ -30,7 +30,7 @@ vz_host = data_host[:,6]
 
 R_sat = np.sqrt(x_sat**2 + y_sat**2 + z_sat**2)
 R_host = np.sqrt(x_host**2 + y_host**2 + z_host**2)
-R_gal = R_sat - R_host
+R_gal = np.sqrt((x_sat - x_host)**2 + (y_sat - y_host)**2 + (z_sat - z_host)**2)
 
 plt.plot(t_sat, R_gal, lw=2)
 plt.plot(t_sat, R_sat, ls='--', lw=2, c='k')
