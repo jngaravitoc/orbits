@@ -49,4 +49,6 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     a_dfz = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
     # Units
     # kpc/Gyr2
+    #print 'here inside the df function'
+    #print a_dfx
     return a_dfx, a_dfy, a_dfz

@@ -36,9 +36,10 @@ def acc_sat(x, y, z, vx, vy, vz):
 
 def acc_host(x, y, z, vx, vy, vz):
     r = np.sqrt(x**2 + y**2 + z**2)
-    Ax =  a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)[0]
-    Ay =  a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)[1]
-    Az =  a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)[2]
+    A_host = a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)
+    Ax =  A_host[0]
+    Ay =  A_host[1]
+    Az =  A_host[2]
     """
     if (r <= Rvir_sat):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_host, Rvir_sat, c_sat)

@@ -72,7 +72,7 @@ adisk: 3.5
 bdisk: 0.53
 
 #Mass of the bulge of the host
-mbulge: 1
+mbulge: 1.0
 
 #Scale length of the bulge
 rhdisk: 0.7
@@ -81,15 +81,15 @@ rhdisk: 0.7
 hostmove: 1
 
 #Dynamical friction alpha parameter
-alpha: 1
+alpha: 1.0
 
-#Dynamical friction for the host (no=0, yes=1)
+#Dynamical friction for the host (no=0, yes=1) # this is not ready
 hostdf: 0
 
 # Time of integration in Gyrs
 
-time: 2.5
+time: 8.0
 
-# Forward integration (1), backwards integration(-1)
+# Forward integration (-1), backwards integration(1)
 
 direction: 1

@@ -224,6 +224,9 @@ def a_mn(a, b, x, y, z, M):
     Ax = -  x * G * M / (R**2 + (a + np.sqrt( z**2 + b**2))**2)**(3.0/2.0)
     Ay = -  y * G * M / (R**2 + (a + np.sqrt( z**2 + b**2))**2)**(3.0/2.0)
     Az = -  z * G * M * (a + np.sqrt(z**2 + b**2)) / ((R**2 + (a + np.sqrt(z**2 + b**2))**2)**(3.0/2.0) * np.sqrt(z**2 + b**2))
+    Ax = Ax.to(units.kpc/units.Gyr**2)
+    Ay = Ay.to(units.kpc/units.Gyr**2)
+    Az = Az.to(units.kpc/units.Gyr**2)
     return Ax.value, Ay.value, Az.value
 
 #+++++++++++++++++++++++++ NFW +++++++++++++++++++++++++++
@@ -322,6 +325,9 @@ def a_NFWnRvir(c, x, y, z, M, Rv):
     ax = G * M / r**2 * (r/(r+a) - np.log(1 + r/a)) * x / r / f
     ay = G * M / r**2 * (r/(r+a) - np.log(1 + r/a)) * y / r / f
     az = G * M / r**2 * (r/(r+a) - np.log(1 + r/a)) * z / r / f
+    ax = ax.to(units.kpc/units.Gyr**2)
+    ay = ay.to(units.kpc/units.Gyr**2)
+    az = az.to(units.kpc/units.Gyr**2)
     return ax.value, ay.value, az.value
 
 
