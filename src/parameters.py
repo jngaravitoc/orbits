@@ -31,7 +31,7 @@ path = str(ConfigSectionMap("params")['path'])
 filename = str(ConfigSectionMap("params")['filename'])
 x_sat = float(ConfigSectionMap("params")['xsat'])
 y_sat = float(ConfigSectionMap("params")['ysat'])
-z_sat = float(ConfigSectionMap("params")['vzsat'])
+z_sat = float(ConfigSectionMap("params")['zsat'])
 vx_sat = float(ConfigSectionMap("params")['vxsat']) * conv_factor
 vy_sat = float(ConfigSectionMap("params")['vysat']) * conv_factor
 vz_sat = float(ConfigSectionMap("params")['vzsat']) * conv_factor
@@ -58,7 +58,7 @@ Host_df = float(ConfigSectionMap("params")['hostdf'])
 time = float(ConfigSectionMap("params")['time'])
 direction = float(ConfigSectionMap("params")['direction'])
 
-out_param = open(input_param + "-savedvalues", "w")
+out_param = open(path + input_param + "-savedvalues", "w")
 out_param.write("xsat%f \n"%(x_sat))
 out_param.write("ysat%f \n"%(y_sat))
 out_param.write("zsat%f \n"%(z_sat))

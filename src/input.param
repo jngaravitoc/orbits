@@ -30,10 +30,10 @@ vzsat: 80
 msat: 10
 
 #Virial radius of the satellite [kpc]
-rvirsat: 50
+rvirsat: 121.25
 
 #concentration parameter of the satellite
-csat: 10
+csat: 18.69
 
 #x-initial position of the host
 xhost: 0
@@ -60,7 +60,7 @@ mhost: 100
 rvirhost: 261
 
 #concentration of the dark matter halo of the host
-chost: 10
+chost: 9.86
 
 #Mass of the disk of the host
 mdisk: 6.5
