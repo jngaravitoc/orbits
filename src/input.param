@@ -84,7 +84,7 @@ hostmove: 1
 alpha: 1
 
 #Dynamical friction for the host (no=0, yes=1)
-hostdf: 1
+hostdf: 0
 
 # Time of integration in Gyrs
 
@@ -92,4 +92,4 @@ time: 2.5
 
 # Forward integration (1), backwards integration(-1)
 
-direction: -1
+direction: 1

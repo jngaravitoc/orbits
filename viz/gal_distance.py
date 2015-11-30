@@ -33,6 +33,7 @@ R_host = np.sqrt(x_host**2 + y_host**2 + z_host**2)
 R_gal = R_sat - R_host
 
 plt.plot(t_sat, R_gal, lw=2)
+plt.plot(t_sat, R_sat, ls='--', lw=2, c='k')
 plt.ylabel("Galactocentric Radius", fontsize=25)
 plt.xlabel("time(Gyrs)", fontsize=25)
 plt.show()
