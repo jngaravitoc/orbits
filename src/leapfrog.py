@@ -85,9 +85,8 @@ def leapfrog():
     ax[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[0]
     ay[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[1]
     az[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[2]
-    print "debugging -------------------------------------------"
-    print ax_mw[1], ax[1]
-    for i in range(2, 2500):
+
+    for i in range(2, len(x)):
         t[i] = t[i-1] - h
         x[i] = x[i-2] - 2 * h * vx[i-1]
         y[i] = y[i-2] - 2 * h * vy[i-1]

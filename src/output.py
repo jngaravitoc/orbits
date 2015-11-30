@@ -8,7 +8,7 @@ def writing(t, xsat, ysat, zsat, vxsat, vysat, vzsat, xhost, yhost, zhost, vxhos
         satellite.write("%f %f %f %f %f %f %f \n"%(t[i], xsat[i],
 ysat[i], zsat[i], vxsat[i]/conv_factor, vysat[i]/conv_factor,
 vzsat[i]/conv_factor))
-        host.write("%f %12f %12f %12f %12f %12f %12f \n"%(t[i], xhost[i], yhost[i], zhost[i], vxhost[i]/conv_factor, vyhost[i]/conv_factor, vzhost[i]/conv_factor))
+        host.write("%f %s %s %s %s %s %s \n"%(t[i], xhost[i], yhost[i], zhost[i], vxhost[i]/conv_factor, vyhost[i]/conv_factor, vzhost[i]/conv_factor))
     satellite.close
     host.close
     print "done!"

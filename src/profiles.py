@@ -265,6 +265,7 @@ def dens_NFWnRvir(c, x, y, z, M, Rv):
     M = M * units.Msun
     f = np.log(1.0 + Rvir/a) - (Rvir/a / (1.0 + Rvir/a))
     rho = M / ((4.0 * np.pi * a**3.0 * f) * (r / a) * (1.0 + (r/a))**2.0)
+    rho = rho.to(units.Msun / units.kpc**3)
     return rho.value
 
 
@@ -317,7 +318,7 @@ def a_NFWnRvir(c, x, y, z, M, Rv):
     x = x*units.kpc
     y = y*units.kpc
     z = z*units.kpc
-    Rvir = Rv * units.kpc 
+    Rvir = Rv * units.kpc
     M = M * units.Msun
     a = Rvir / c
     r = np.sqrt(x**2 + y**2 + z**2)

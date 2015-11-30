@@ -24,7 +24,7 @@ def sigma(c, r, M, Rv):
     x = r / Rv.value * c
     sigma = vmax * 1.4393 * x **(0.354) / (1 + 1.1756*x**0.725)
     sigma = sigma.to(units.kpc / units.Gyr)
-    return sigma.value
+    return sigma
 
 def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     # M2 would be the galaxy feeling the dynamical friction due to M1
@@ -33,22 +33,28 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     r = np.sqrt(x**2 + y**2 + z**2)
     # Velocities
     v = np.sqrt(vx**2 + vy**2 + vz**2)
+    v = v * units.kpc / units.Gyr
     # Density of the NFW at a given r
     rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
-    # Mass of the satellite
+    rho = rho * units.Msun / units.kpc**3
     # Computing the dynamical friction
     factor = - 4 * np.pi * G**2
     factor = factor.to(units.kpc**6 / units.Msun**2 / units.Gyr**4)
-    factor = factor.value
+    #factor = factor.value
+    vx = vx * units.kpc / units.Gyr
+    vy = vy * units.kpc / units.Gyr
+    vz = vz * units.kpc / units.Gyr
+    M2 = M2 * units.Msun
+    M1 = M1 * units.Msun
     Coulomb =  coulomb_log(r)
-    s = sigma(c, r, M1, Rv)
+    s = sigma(c, r, M1.value, Rv)
     X = v / ( np.sqrt(2) * s)
     # Main equation
-    a_dfx = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vx) / v**3.0
-    a_dfy = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vy) / v**3.0
-    a_dfz = (factor * M2 * rho * Coulomb * (erf(X) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
+    a_dfx = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vx) / v**3.0
+    a_dfy = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vy) / v**3.0
+    a_dfz = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
     # Units
-    # kpc/Gyr2
-    #print 'here inside the df function'
-    #print a_dfx
-    return a_dfx, a_dfy, a_dfz
+    a_dfx = a_dfx.to(units.kpc / units.Gyr**2)
+    a_dfy = a_dfy.to(units.kpc / units.Gyr**2)
+    a_dfz = a_dfz.to(units.kpc / units.Gyr**2)
+    return a_dfx.value, a_dfy.value, a_dfz.value
