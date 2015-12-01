@@ -41,9 +41,9 @@ def acc_host(x, y, z, vx, vy, vz):
         A_host = a_hernquist(rs_sat, x, y, z, M_sat)
     elif (Sat_model == 0):
         A_host = a_plummer(rs_sat, x, y, z, M_sat)
-    Ax =  A_host[0]
-    Ay =  A_host[1]
-    Az =  A_host[2]
+    Ax = A_host[0]
+    Ay = A_host[1]
+    Az = A_host[2]
     if (Host_df==1):
         D = np.sqrt(x**2 + y**2 + z**2)
         R_mass = Rvir_sat - D
