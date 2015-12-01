@@ -29,11 +29,17 @@ vzsat: 80
 #Dark matter mass of the halo satellite [Msun]
 msat: 10
 
+# Satellite model: (Plummer=0, Hernquist=1, NFW=2)
+satmodel: 2
+
 #Virial radius of the satellite [kpc]
 rvirsat: 121.25
 
 #concentration parameter of the satellite
 csat: 18.69
+
+# Satellite scale radius for the Hernquist/Plummer model [kpc]
+rssat: 0.0
 
 #x-initial position of the host
 xhost: 0
@@ -84,7 +90,7 @@ hostmove: 1
 alpha: 1.0
 
 #Dynamical friction for the host (no=0, yes=1) # this is not ready
-hostdf: 0
+hostdf: 1
 
 # Time of integration in Gyrs
 

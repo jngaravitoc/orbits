@@ -35,16 +35,22 @@ def acc_sat(x, y, z, vx, vy, vz):
     return Ax, Ay, Az
 
 def acc_host(x, y, z, vx, vy, vz):
-    r = np.sqrt(x**2 + y**2 + z**2)
-    A_host = a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)
+    if (Sat_model == 2):
+        A_host = a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)
+    elif (Sat_model == 1):
+        A_host = a_hernquist(rs_sat, x, y, z, M_sat)
+    elif (Sat_model == 0):
+        A_host = a_plummer(rs_sat, x, y, z, M_sat)
     Ax =  A_host[0]
     Ay =  A_host[1]
     Az =  A_host[2]
-    """
-    if (r <= Rvir_sat):
-        a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_host, Rvir_sat, c_sat)
+    if (Host_df==1):
+        D = np.sqrt(x**2 + y**2 + z**2)
+        R_mass = Rvir_sat - D
+        # fraction mass of the host galaxy inside the satellite.
+        M_frac = mass_NFWnRvir(c_host, R_mass, 0, 0, M_host, Rvir_host)
+        a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_frac, Rvir_sat, c_sat)
         Ax = Ax + a_dfx
         Ay = Ay + a_dfy
         Az = Az + a_dfz
-    """
     return Ax, Ay, Az

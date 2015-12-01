@@ -9,7 +9,7 @@ import sys
 input_param = sys.argv[1]
 
 Config = ConfigParser.ConfigParser()
-Config.read(input_param)
+Config.read("../params/" + input_param)
 
 def ConfigSectionMap(section):
     dict1 = {}
@@ -36,8 +36,10 @@ vx_sat = float(ConfigSectionMap("params")['vxsat']) * conv_factor
 vy_sat = float(ConfigSectionMap("params")['vysat']) * conv_factor
 vz_sat = float(ConfigSectionMap("params")['vzsat']) * conv_factor
 M_sat = float(ConfigSectionMap("params")['msat']) * 1E10
+Sat_model = float(ConfigSectionMap("params")['satmodel'])
 Rvir_sat = float(ConfigSectionMap("params")['rvirsat'])
 c_sat = float(ConfigSectionMap("params")['csat'])
+rs_sat = float(ConfigSectionMap("params")['rssat'])
 x_host = float(ConfigSectionMap("params")['xhost'])
 y_host = float(ConfigSectionMap("params")['yhost'])
 z_host = float(ConfigSectionMap("params")['zhost'])
@@ -65,4 +67,5 @@ out_param.write("zsat%f \n"%(z_sat))
 out_param.write("vxsat%f \n"%(vx_sat))
 out_param.write("vysat%f \n"%(vy_sat))
 out_param.write("vzsat%f \n"%(vz_sat))
+out_param.write("Msat%f \n"%(M_sat))
 out_param.close()
