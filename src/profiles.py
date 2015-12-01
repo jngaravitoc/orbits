@@ -295,6 +295,18 @@ def mass_NFW(c, x, y, z, M):
     mass = M * (np.log(1 + r/a) - r/(a+r)) / f
     return mass.value
 
+def mass_NFWnRvir(c, x, y, z, M, Rv):
+    x = x*units.kpc
+    y = y*units.kpc
+    z = z*units.kpc
+    Rvir = Rv * units.kpc # here we are working at z=0
+    a = Rvir / c
+    M = M * units.Msun
+    r = np.sqrt(x**2 + y**2 + z**2)
+    f = np.log(1.0 + c) - (c / (1.0 + c))
+    mass = M * (np.log(1 + r/a) - r/(a+r)) / f
+    return mass.value
+
 def a_NFW(c, x, y, z, M):
     x = x*units.kpc
     y = y*units.kpc
