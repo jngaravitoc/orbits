@@ -6,6 +6,8 @@ from leapfrog import *
 from output import *
 
 
-t, xsat , ysat, zsat, xhost, yhost, zhost, vxsat, vysat, vzsat, vxhost, vyhost, vzhost = leapfrog()
+t, xsat, ysat, zsat, vxsat, vysat, vzsat, xhost, yhost, zhost, \
+vxhost, vyhost, vzhost = leapfrog()
 
-writing(t, xsat, ysat, zsat, vxsat, vysat, vzsat, xhost, yhost, zhost, vxhost, vyhost, vzhost)
+writing(t, xsat, ysat, zsat, vxsat, vysat, vzsat, xhost, yhost, \
+zhost, vxhost, vyhost, vzhost)
