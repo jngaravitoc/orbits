@@ -17,7 +17,7 @@ def acc_sat(x, y, z, vx, vy, vz):
 
     if (r <= Rvir_host):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat, \
-                              Rvir_host, c_host)
+                              Rvir_host, c_host, alpha_df_sat)
         Ax = ax + a_dfx
         Ay = ay + a_dfy
         Az = az + a_dfz
@@ -54,7 +54,7 @@ def acc_host(x, y, z, vx, vy, vz):
         # Mass fraction of the host galaxy inside the satellite.
         M_frac = mass_NFWnRvir(c_host, R_mass, 0, 0, M_host, Rvir_host)
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_frac,\
-                              Rvir_sat, c_sat)
+                              Rvir_sat, c_sat, alpha_df_host)
         Ax = Ax + a_dfx
         Ay = Ay + a_dfy
         Az = Az + a_dfz

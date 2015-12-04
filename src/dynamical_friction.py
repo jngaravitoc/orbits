@@ -4,7 +4,7 @@ from astropy import units, constants
 from profiles import *
 from parameters import *
 
-def coulomb_log(r):
+def coulomb_log(r, alpha):
     bmax = r # position of test particle at a given time
     # k = softening length if the satellite is modeled with a plummer
     # profile. See http://adsabs.harvard.edu/abs/2007ApJ...668..949B
@@ -12,7 +12,7 @@ def coulomb_log(r):
     bmin = 1.4 * k
     L = bmax / bmin
     # alpha is for make the dynamical friction more realistic.
-    CL = alpha_df * np.log(L)
+    CL = alpha * np.log(L)
     return CL
 
 def sigma(c, r, M, Rv):
@@ -26,7 +26,7 @@ def sigma(c, r, M, Rv):
     sigma = sigma.to(units.kpc / units.Gyr)
     return sigma
 
-def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
+def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     # M2 would be the galaxy feeling the dynamical friction due to M1
     # Rv, c, (x, y, z) and (vx, vy, vz) are for the M2 galaxy
     # Coordinates
@@ -46,7 +46,7 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c):
     vz = vz * units.kpc / units.Gyr
     M2 = M2 * units.Msun
     M1 = M1 * units.Msun
-    Coulomb =  coulomb_log(r)
+    Coulomb =  coulomb_log(r, alpha)
     s = sigma(c, r, M1.value, Rv)
     X = v / ( np.sqrt(2) * s)
     # Main equation
