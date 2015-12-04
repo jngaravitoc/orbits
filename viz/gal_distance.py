@@ -6,8 +6,8 @@ if (len(sys.argv)<2):
     print "use: satellite  host"
 filename1 = str(sys.argv[1])
 filename2 = str(sys.argv[2])
-path1 = "../data/" + filename1
-path2 = "../data/" + filename2
+path1 = "../data/sag/" + filename1
+path2 = "../data/sag/" + filename2
 
 data_sat = np.loadtxt(path1)
 data_host = np.loadtxt(path2)
