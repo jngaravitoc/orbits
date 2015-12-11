@@ -7,7 +7,7 @@
 # output file path
 path: ../data/
 # output filename
-filename: sag_heavy_free_ndf_a1
+filename: sag_heavy_full
 #x-initial position of the satellite [kpc]
 xsat: 80
 
@@ -87,8 +87,8 @@ rhdisk: 0.7
 hostmove: 1
 
 #Dynamical friction alpha parameter
-alphasat: 1.0
-alphahost: 1.0
+alphasat: 0.3
+alphahost: 0.1
 
 #Dynamical friction for the host (no=0, yes=1)
 hostdf: 0
