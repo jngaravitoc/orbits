@@ -7,6 +7,9 @@ import ConfigParser
 import sys
 
 input_param = sys.argv[1]
+alpha_df_sat = sys.argv[2]
+alpha_df_host = sys.argv[3]
+filename = sys.argv[4]
 
 Config = ConfigParser.ConfigParser()
 Config.read("../params/" + input_param)
@@ -28,7 +31,7 @@ def ConfigSectionMap(section):
 conv_factor = 1.0227121650537077
 
 path = str(ConfigSectionMap("params")['path'])
-filename = str(ConfigSectionMap("params")['filename'])
+#filename = str(ConfigSectionMap("params")['filename'])
 x_sat = float(ConfigSectionMap("params")['xsat'])
 y_sat = float(ConfigSectionMap("params")['ysat'])
 z_sat = float(ConfigSectionMap("params")['zsat'])
@@ -55,8 +58,8 @@ b_disk = float(ConfigSectionMap("params")['bdisk'])
 M_bulge = float(ConfigSectionMap("params")['mbulge']) * 1E10
 rh = float(ConfigSectionMap("params")['rhdisk'])
 Host_move = float(ConfigSectionMap("params")['hostmove'])
-alpha_df_sat = float(ConfigSectionMap("params")['alphasat'])
-alpha_df_host = float(ConfigSectionMap("params")['alphahost'])
+#alpha_df_sat = float(ConfigSectionMap("params")['alphasat'])
+#alpha_df_host = float(ConfigSectionMap("params")['alphahost'])
 Host_df = float(ConfigSectionMap("params")['hostdf'])
 time = float(ConfigSectionMap("params")['time'])
 direction = float(ConfigSectionMap("params")['direction'])
