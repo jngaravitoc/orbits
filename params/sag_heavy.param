@@ -95,7 +95,7 @@ hostdf: 0
 
 # Time of integration in Gyrs
 
-time: 8.0
+time: 12.0
 
 # Forward integration (-1), backwards integration(1)
 

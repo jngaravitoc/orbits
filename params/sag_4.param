@@ -87,8 +87,8 @@ rhdisk: 0.7
 hostmove: 1
 
 #Dynamical friction alpha parameter
-alphasat: 0.2
-alphahost: 0.2
+alphasat: 0.3
+alphahost: 0.1
 
 #Dynamical friction for the host (no=0, yes=1)
 hostdf: 1.0
