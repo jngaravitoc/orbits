@@ -71,10 +71,13 @@ def pot_hernquist(a, r, M):
     phi = -G*M / (r+a)
     return phi.value
 
-def dens_hernquist(a, r, M):
+def dens_hernquist(a, x, y, z, M):
+    x = x * units.kpc
+    y = y * units.kpc
+    z = z * units.kpc
     a = a * units.kpc
-    r = r * units.kpc
     M = M * units.Msun
+    r = np.sqrt(x**2 + y**2 + z**2)
     rho = M / (2 * np.pi) * a / (r*(r+a)**3)
     return rho.value
 
