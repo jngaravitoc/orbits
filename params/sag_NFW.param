@@ -1,0 +1,107 @@
+############################################
+# Inpute parameter file, please do not change
+# the description of the parameter neither
+# the name of the value.
+###########################################
+[params]
+# output file path
+path: ../data/sag/
+# output filename
+filename: sag_NFW
+#x-initial position of the satellite [kpc]
+xsat: -206.66
+
+#y-initial position of the satellite [kpc]
+ysat: 0.0
+
+#z-initial position of the satellite [kpc]
+zsat: -231.59
+
+#vx-initial velocity of the satellite [km/s]
+vxsat: 95.05
+
+#vy-initial velocity of the satellite [km/s]
+vysat: 0.0
+
+#vz-initial velocity of the satellite [km/s]
+vzsat: 23.5
+
+#Dark matter mass of the halo satellite [Msun]
+msat: 10
+
+# Satellite model: (Plummer = 0, Hernquist = 1, NFW = 2)
+satmodel: 2
+
+#Virial radius of the satellite [kpc]
+rvirsat: 121.25
+
+#concentration parameter of the satellite
+csat: 18.69
+
+# Satellite scale radius for the Hernquist/Plummer model [kpc]
+rssat: 0.0
+
+#x-initial position of the host
+xhost: 6.36
+
+#y-initial position of the host
+yhost: 0.0
+
+#z-initial position of the host
+zhost: -80.85
+
+#vx-initial velocity of the host
+vxhost: -9.64
+
+#vy-initial velocity of the host
+vyhost: 0.0
+
+#vz-initial velocity of the host
+vzhost: 23.5
+
+# hostmodel (NFW=0), (Hernquist=1)
+hostmodel: 0
+
+#Mass of the dark matter halo of the host
+mhost: 100
+
+#Virial radius of the dark matter halo of the host, or Hermquist scale
+#length
+
+rvirhost: 261
+
+#concentration of the dark matter halo of the host
+chost: 9.86
+
+#Mass of the disk of the host
+mdisk: 6.5
+
+#Disk a parameter (following Binney & Tremaine notation)
+adisk: 3.5
+
+#Disk b parameter (following Binney & Tremaine notation)
+bdisk: 0.53
+
+#Mass of the bulge of the host
+mbulge: 1.0
+
+#Scale length of the bulge
+rhdisk: 0.7
+
+#Fixed Host(0) at a point [0,0,0] , Free Host(1)
+hostmove: 1
+
+#Dynamical friction alpha parameter
+alphasat: 0.457
+alphahost: 1.0
+
+#Dynamical friction for the host (no=0, yes=1)
+hostdf: 0.0
+
+# Time of integration in Gyrs
+
+time: 9.0
+
+# Forward integration (-1), backwards integration(1)
+
+direction: -1
