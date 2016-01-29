@@ -38,7 +38,7 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     if Host_model = 0:
         rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
     elif Host_model = 1:
-        rho = dens_Hernquist(Rv, x, y, z, M1)
+        rho = dens_hernquist(Rv, x, y, z, M1)
     rho = rho * units.Msun / units.kpc**3.0
     # Computing the dynamical friction
     factor = - 4.0 * np.pi * G**2.0
