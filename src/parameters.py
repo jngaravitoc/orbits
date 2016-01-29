@@ -49,6 +49,7 @@ vy_host = float(ConfigSectionMap("params")['vyhost']) * conv_factor
 vz_host = float(ConfigSectionMap("params")['vzhost']) * conv_factor
 M_host = float(ConfigSectionMap("params")['mhost']) * 1E10
 Rvir_host =  float(ConfigSectionMap("params")['rvirhost'])
+rs_host = float(ConfigSectionMap("params")['rshost'])
 c_host = float(ConfigSectionMap("params")['chost'])
 M_disk = float(ConfigSectionMap("params")['mdisk']) * 1E10
 a_disk = float(ConfigSectionMap("params")['adisk'])

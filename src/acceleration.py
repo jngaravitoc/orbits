@@ -8,7 +8,7 @@ def acc_sat(x, y, z, vx, vy, vz):
     if (Host_model == 0):
         ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
     elif (Host_model == 1):
-        ahalo = a_Hernquist(Rvir_host, x, y, z, M_host)
+        ahalo = a_hernquist(rs_host, x, y, z, M_host)
     adisk = a_mn(a_disk, b_disk, x, y, z, M_disk)
     abulge = a_hernquist(rh, x, y, z, M_bulge)
     ax = ahalo[0] + adisk[0] + abulge[0]
@@ -58,7 +58,7 @@ def acc_host(x, y, z, vx, vy, vz):
         if (Host_model == 0):
             M_frac = mass_NFWnRvir(c_host, R_mass, 0, 0, M_host, Rvir_host)
         elif (Host_model ==1):
-            M_frac = mass_hernquist(Rvir_host, R_mass,M_host)
+            M_frac = mass_hernquist(rs_host, R_mass,M_host)
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_sat, M_frac,\
                               Rvir_sat, c_sat, alpha_df_host)
         Ax = Ax + a_dfx
