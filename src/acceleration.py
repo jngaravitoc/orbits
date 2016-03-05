@@ -1,3 +1,8 @@
+"""
+This code computes the acceleration for the satellite and the host.
+
+"""
+
 import numpy as np
 from astropy import units, constants
 from profiles import *
@@ -9,8 +14,10 @@ def acc_sat(x, y, z, vx, vy, vz):
         ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
     elif (Host_model == 1):
         ahalo = a_hernquist(rs_host, x, y, z, M_host)
+
     adisk = a_mn(a_disk, b_disk, x, y, z, M_disk)
     abulge = a_hernquist(rh, x, y, z, M_bulge)
+
     ax = ahalo[0] + adisk[0] + abulge[0]
     ay = ahalo[1] + adisk[1] + abulge[1]
     az = ahalo[2] + adisk[2] + abulge[2]

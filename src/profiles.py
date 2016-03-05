@@ -82,7 +82,7 @@ def dens_hernquist(a, x, y, z, M):
     return rho.value
 
 def mass_hernquist(a, r, M):
-    a = a*  units.kpc
+    a = a *  units.kpc
     r = r * units.kpc
     M = M * units.Msun
     Mass = M * r**2 / (r+a)**2
