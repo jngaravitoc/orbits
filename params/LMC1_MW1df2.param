@@ -7,24 +7,24 @@
 # output file path
 path: ../data/lmc/
 # output filename
-filename: lmc3_MWHern1df9
+filename: lmc3_MWHern1df2
 #x-initial position of the satellite [kpc]
-xsat: -3.37
+xsat: -1
 
 #y-initial position of the satellite [kpc]
-ysat: -42.62
+ysat: -41
 
 #z-initial position of the satellite [kpc]
-zsat: -19.713
+zsat: -28
 
 #vx-initial velocity of the satellite [km/s]
-vxsat: -45.51
+vxsat: -57
 
 #vy-initial velocity of the satellite [km/s]
-vysat: -161.23
+vysat: -226
 
 #vz-initial velocity of the satellite [km/s]
-vzsat: 166.417
+vzsat: 221
 
 #Dark matter mass of the halo satellite [Msun]
 msat: 8
