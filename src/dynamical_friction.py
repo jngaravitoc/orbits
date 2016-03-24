@@ -4,6 +4,7 @@ from astropy import units, constants
 from profiles import *
 from parameters import *
 
+# Coulomb Logarithm definition:
 def coulomb_log(r, alpha):
     bmax = r # position of test particle at a given time
     # k = softening length if the satellite is modeled with a plummer
@@ -15,6 +16,8 @@ def coulomb_log(r, alpha):
     CL = alpha * np.log(L)
     return CL
 
+#One dimensional velocidty dispersion analytic approx.
+#From Zentner and Bullock 2003 for a NFW profile!
 def sigma(c, r, M, Rv):
     M = M * units.Msun
     Rv = Rv * units.kpc
@@ -26,6 +29,7 @@ def sigma(c, r, M, Rv):
     sigma = sigma.to(units.kpc / units.Gyr)
     return sigma
 
+# Dynamical Friction computation
 def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     # M2 would be the galaxy feeling the dynamical friction due to M1
     # Rv, c, (x, y, z) and (vx, vy, vz) are for the M2 galaxy
@@ -53,10 +57,10 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     s = sigma(c, r, M1.value, Rv)
     X = v / ( np.sqrt(2.0) * s)
     # Main equation
-    a_dfx = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vx) / v**3.0
-    a_dfy = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vy) / v**3.0
+    a_dfx = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vx)/v**3.0
+    a_dfy = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vy)/v**3.0
     a_dfz = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
-    # Units
+    # Conversion to the correct units
     a_dfx = a_dfx.to(units.kpc / units.Gyr**2.0)
     a_dfy = a_dfy.to(units.kpc / units.Gyr**2.0)
     a_dfz = a_dfz.to(units.kpc / units.Gyr**2.0)
