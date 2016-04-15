@@ -6,7 +6,7 @@ from parameters import *
 def leapfrog():
     # h is the time step
     h = 0.001 * direction
-    n_points = time * 1000.0
+    n_points = int(time * 1000.0)
 
     t = np.zeros(n_points)
     x = np.zeros(n_points)
