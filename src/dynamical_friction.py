@@ -16,6 +16,13 @@ def coulomb_log(r, alpha):
     CL = alpha * np.log(L)
     return CL
 
+# Coulomb Logarithm from Van Der Marel et al 2013. Eq A1
+def coulomb_v_log(L, r, alpha_v, a, C):
+    l = np.log10(r/(C*a))**alpha_v
+    x = [l, L]
+    return np.max(x)
+
+
 #One dimensional velocidty dispersion analytic approx.
 #From Zentner and Bullock 2003 for a NFW profile!
 def sigma(c, r, M, Rv):
@@ -53,7 +60,10 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     vz = vz * units.kpc / units.Gyr
     M2 = M2 * units.Msun
     M1 = M1 * units.Msun
-    Coulomb =  coulomb_log(r, alpha)
+    if (cl==0):
+         Coulomb = coulomb_log(r, alpha)
+    elif (cl==1):
+         Coulomb = coulomb_v_log(L, r, alpha, rs_sat ,C)
     s = sigma(c, r, M1.value, Rv)
     X = v / ( np.sqrt(2.0) * s)
     # Main equation

@@ -7,7 +7,7 @@
 # output file path
 path: ../data/sag/
 # output filename
-filename: sag_Hern
+filename: sag_Herndf
 #x-initial position of the satellite [kpc]
 xsat: -80
 
@@ -30,7 +30,7 @@ vzsat: 80.0
 msat: 10
 
 # Satellite model: (Plummer = 0, Hernquist = 1, NFW = 2)
-satmodel: 2
+satmodel: 1
 
 #Virial radius of the satellite [kpc]
 rvirsat: 121.25
@@ -39,7 +39,7 @@ rvirsat: 121.25
 csat: 18.69
 
 # Satellite scale radius for the Hernquist/Plummer model [kpc]
-rssat: 0.0
+rssat: 20.0
 
 #x-initial position of the host
 xhost: 0.0
@@ -93,16 +93,24 @@ rhdisk: 0.7
 #Fixed Host(0) at a point [0,0,0] , Free Host(1)
 hostmove: 1
 
-#Dynamical friction alpha parameter
-alphasat: 1.0
+#Choose coulomb logarithm (0) Besla 07, (1) Van Der Marel e.a 2013
+coulombl: 0
+
+#Dynamical friction alpha parameter for both Besla07 and VDM 2013
+alphasat: 0.45
 alphahost: 1.0
 
+# L constant in the Van Der Marel Coulomb Logarithm
+lvalue: 0
+# C constant in the Van der Marel Coulomb Logarithm
+cvalue: 1.22
+
 #Dynamical friction for the host (no=0, yes=1)
-hostdf: 0.0
+hostdf: 1.0
 
 # Time of integration in Gyrs
 
-time: 9.0
+time: 4.0
 
 # Forward integration (-1), backwards integration(1)
 

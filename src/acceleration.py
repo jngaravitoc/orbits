@@ -9,7 +9,10 @@ from profiles import *
 from parameters import *
 from dynamical_friction import *
 
+#Function that computes the satellite acceleration
+
 def acc_sat(x, y, z, vx, vy, vz):
+    # Acceleration by the DM halo profile
     if (Host_model == 0):
         ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
     elif (Host_model == 1):
@@ -23,14 +26,15 @@ def acc_sat(x, y, z, vx, vy, vz):
     az = ahalo[2] + adisk[2] + abulge[2]
     r = np.sqrt(x**2 + y**2 + z**2)
 
-    # Truncating the halo at the virial radius
-
+    # Truncating the halo at r_vir:
+    # Dynamical Friction inside the r_vir
     if (r <= Rvir_host):
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat, \
                               Rvir_host, c_host, alpha_df_sat)
         Ax = ax + a_dfx
         Ay = ay + a_dfy
         Az = az + a_dfz
+    # Point like acceleration beyond r_vir
     else:
         Mtot = (M_host + M_disk + M_bulge) * units.Msun
         Ax = - G * Mtot * x * units.kpc / (r*units.kpc)**3
@@ -44,7 +48,9 @@ def acc_sat(x, y, z, vx, vy, vz):
         Az = Az.value
     return Ax, Ay, Az
 
+# Function that computes the host acceleration
 def acc_host(x, y, z, vx, vy, vz):
+    #Host halo acceleration due to the Satellite DM halo profile.
     if (Sat_model == 2):
         A_host = a_NFWnRvir(c_sat, x, y, z, M_sat, Rvir_sat)
 
@@ -58,6 +64,7 @@ def acc_host(x, y, z, vx, vy, vz):
     Ay = A_host[1]
     Az = A_host[2]
 
+    # Host dynamical friction:
     if (Host_df==1):
         D = np.sqrt(x**2 + y**2 + z**2)
         R_mass = Rvir_host - (Rvir_sat - D)
