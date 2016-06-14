@@ -57,6 +57,14 @@ def leapfrog():
     az[0] = acc_sat((x[0]-x_mw[0]), (y[0]-y_mw[0]), (z[0]-z_mw[0]),\
             (vx[0]-vx_mw[0]), (vy[0]-vy_mw[0]), (vz[0]-vz_mw[0]))[2]
 
+    if (sat2==True):
+        ax2[0] = acc_sat((x2[0]-x_mw[0]), (y2[0]-y_mw[0]), (z2[0]-z_mw[0]),\
+                (vx2[0]-vx_mw[0]), (vy2[0]-vy_mw[0]), (vz2[0]-vz_mw[0]))[0]
+        ay2[0] = acc_sat2((x2[0]-x_mw[0]), (y2[0]-y_mw[0]), (z2[0]-z_mw[0]),\
+                (vx2[0]-vx_mw[0]), (vy2[0]-vy_mw[0]), (vz2[0]-vz_mw[0]))[1]
+        az2[0] = acc_sat2((x2[0]-x_mw[0]), (y2[0]-y_mw[0]), (z2[0]-z_mw[0]),\
+                (vx2[0]-vx_mw[0]), (vy2[0]-vy_mw[0]), (vz2[0]-vz_mw[0]))[2]
+
     ax_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] -z[0]),\
                (vx_mw[0] - vx[0]), (vy_mw[0] - vy[0]), (vz_mw[0] - vz[0]))[0]
     ay_mw[0] = acc_host((x_mw[0]-x[0]), (y_mw[0] - y[0]), (z_mw[0] -z[0]),\
@@ -92,6 +100,16 @@ def leapfrog():
     ax[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[0]
     ay[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[1]
     az[1] = acc_sat(x[1]-x_mw[1], y[1]-y_mw[1], z[1]-z_mw[1], vx[1]-vx_mw[1], vy[1]-vy_mw[1], vz[1]-vz_mw[1])[2]
+
+
+
+    if (sat2==True):
+        ax2[1] = acc_sat((x2[1]-x_mw[1]), (y2[1]-y_mw[1]),(z2[1]-z_mw[1]),\
+                (vx2[1]-vx_mw[1]), (vy2[1]-vy_mw[1]),(vz2[1]-vz_mw[1]))[0]
+        ay2[1] = acc_sat2((x2[1]-x_mw[1]), (y2[1]-y_mw[1]), (z2[1]-z_mw[1]),\
+                (vx2[1]-vx_mw[1]), (vy2[1]-vy_mw[1]), (vz2[1]-vz_mw[1]))[1]
+        az2[1] = acc_sat2((x2[1]-x_mw[1]), (y2[1]-y_mw[1]), (z2[1]-z_mw[1]),\
+                (vx2[1]-vx_mw[1]), (vy2[1]-vy_mw[1]), (vz2[1]-vz_mw[1]))[2]
 
     for i in range(2, len(x)):
         t[i] = t[i-1] - h
