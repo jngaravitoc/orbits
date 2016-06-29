@@ -33,9 +33,24 @@
 
 #python ../src/main.py LMC1_MW1df85.param
 #python ../src/main.py LMC1_MW1df8.param
-#python ../src/main.py LMC1_MW1df9.param
+#python ../src/main.py LMC1_MW1df2.param
 #python ../src/main.py LMC1_MW1df95.param
 #python ../src/main.py LMC1_MW1NFW8.param
 #python ../src/main.py LMC1_MW1NFW85.param
-#python ../src/main.py LMC1_MW1NFW9.param
-python ../src/main.py LMC1_MW1NFW95.param
+#python ../src/main.py LMC1_MW1NFW2.param
+#python ../src/main.py LMC1_MW1NFW95.param
+
+
+#python ../src/main.py LMC1_MW1-NFW.param
+#python ../src/main.py LMC1_MW1.param
+
+#python ../src/main.py LMC6_MWpmdf18.param
+#python ../src/main.py LMC6_MWpmdf15.param
+#python ../src/main.py LMC6_MWpmdf20.param
+#python ../src/main.py LMC6_MWpmdf05b.param
+
+#python ../src/main.py LMC5_MWpmdf05b.param
+#python ../src/main.py LMC5_MWpmdf06b.param
+#python ../src/main.py LMC5_MWpmdf07b.param
+
+python ../src/main.py df_test.param
