@@ -5,26 +5,26 @@
 ###########################################
 [params]
 # output file path
-path: ../data/sag/
+path: ../data/lmc/
 # output filename
-filename: sag_Herndf
+filename: lmc4_Herndf_vdm
 #x-initial position of the satellite [kpc]
-xsat: -80
+xsat: -1
 
 #y-initial position of the satellite [kpc]
-ysat: 0.0
+ysat: -41
 
 #z-initial position of the satellite [kpc]
-zsat: 0.0
+zsat: -28
 
 #vx-initial velocity of the satellite [km/s]
-vxsat: 0.0
+vxsat:  -57
 
 #vy-initial velocity of the satellite [km/s]
-vysat: 0.0
+vysat: -226
 
 #vz-initial velocity of the satellite [km/s]
-vzsat: 80.0
+vzsat: 221
 
 #Dark matter mass of the halo satellite [Msun]
 msat: 10
@@ -36,10 +36,10 @@ satmodel: 1
 rvirsat: 121.25
 
 #concentration parameter of the satellite
-csat: 18.69
+csat: 15.69
 
 # Satellite scale radius for the Hernquist/Plummer model [kpc]
-rssat: 20.0
+rssat: 24.1
 
 #x-initial position of the host
 xhost: 0.0
@@ -63,29 +63,29 @@ vzhost: 0.0
 hostmodel: 1
 
 #Mass of the dark matter halo of the host
-mhost: 1.46
+mhost: 155
 
 #Virial radius of the dark matter halo of the host, or Hermquist scale
 #length
 
-rvirhost: 262
+rvirhost: 279
 
-rshost: 54.75
+rshost: 40.85
 
 #concentration of the dark matter halo of the host
-chost: 10.0
+chost: 15.0
 
 #Mass of the disk of the host
-mdisk: 6.5
+mdisk: 5.78
 
 #Disk a parameter (following Binney & Tremaine notation)
-adisk: 3.5
+adisk: 2.9
 
 #Disk b parameter (following Binney & Tremaine notation)
 bdisk: 0.53
 
 #Mass of the bulge of the host
-mbulge: 1.0
+mbulge: 1.4
 
 #Scale length of the bulge
 rhdisk: 0.7
@@ -94,10 +94,10 @@ rhdisk: 0.7
 hostmove: 1
 
 #Choose coulomb logarithm (0) Besla 07, (1) Van Der Marel e.a 2013
-coulombl: 0
+coulombl: 1
 
 #Dynamical friction alpha parameter for both Besla07 and VDM 2013
-alphasat: 0.45
+alphasat: 0.0
 alphahost: 1.0
 
 # L constant in the Van Der Marel Coulomb Logarithm
@@ -106,11 +106,11 @@ lvalue: 0
 cvalue: 1.22
 
 #Dynamical friction for the host (no=0, yes=1)
-hostdf: 1.0
+hostdf: 0
 
 # Time of integration in Gyrs
 
-time: 4.0
+time: 3.0
 
 # Forward integration (-1), backwards integration(1)
 
