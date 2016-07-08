@@ -53,4 +53,6 @@
 #python ../src/main.py LMC5_MWpmdf06b.param
 #python ../src/main.py LMC5_MWpmdf07b.param
 
-python ../src/main.py df_test.param
+#python ../src/main.py df_test1.param
+#python ../src/main.py df_test2.param
+python ../src/main.py df_test3.param
