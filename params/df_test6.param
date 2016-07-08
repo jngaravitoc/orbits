@@ -7,7 +7,7 @@
 # output file path
 path: ../data/lmc/
 # output filename
-filename: lmc1_Herndf_vdm_cl3
+filename: lmc6_Herndf_vdm_cl3
 #x-initial position of the satellite [kpc]
 xsat: -1
 
@@ -27,19 +27,19 @@ vysat: -226
 vzsat: 221
 
 #Dark matter mass of the halo satellite [Msun]
-msat: 3
+msat: 25
 
 # Satellite model: (Plummer = 0, Hernquist = 1, NFW = 2)
 satmodel: 1
 
 #Virial radius of the satellite [kpc]
-rvirsat: 121.25
+rvirsat: 0.0
 
 #concentration parameter of the satellite
 csat: 0.0
 
 # Satellite scale radius for the Hernquist/Plummer model [kpc]
-rssat: 4.5
+rssat: 19.5
 
 #x-initial position of the host
 xhost: 0.0
@@ -63,14 +63,14 @@ vzhost: 0.0
 hostmodel: 1
 
 #Mass of the dark matter halo of the host
-mhost: 155
+mhost: 150
 
 #Virial radius of the dark matter halo of the host, or Hernquist scale
 #length
 
-rvirhost: 279
+rvirhost: 300.
 
-rshost: 40.85
+rshost: 20.
 
 #concentration of the dark matter halo of the host
 chost: 15.0

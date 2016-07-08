@@ -33,13 +33,13 @@ msat: 3
 satmodel: 1
 
 #Virial radius of the satellite [kpc]
-rvirsat: 121.25
+rvirsat: 0.0
 
 #concentration parameter of the satellite
 csat: 0.0
 
 # Satellite scale radius for the Hernquist/Plummer model [kpc]
-rssat: 4.5
+rssat: 5.9
 
 #x-initial position of the host
 xhost: 0.0
@@ -63,14 +63,14 @@ vzhost: 0.0
 hostmodel: 1
 
 #Mass of the dark matter halo of the host
-mhost: 155
+mhost: 150
 
 #Virial radius of the dark matter halo of the host, or Hernquist scale
 #length
 
-rvirhost: 279
+rvirhost: 300.
 
-rshost: 40.85
+rshost: 20.
 
 #concentration of the dark matter halo of the host
 chost: 15.0

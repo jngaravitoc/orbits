@@ -7,7 +7,7 @@
 # output file path
 path: ../data/lmc/
 # output filename
-filename: lmc1_Herndf_vdm_cl3
+filename: lmc3_Herndf_vdm_cl2-7
 #x-initial position of the satellite [kpc]
 xsat: -1
 
@@ -27,19 +27,19 @@ vysat: -226
 vzsat: 221
 
 #Dark matter mass of the halo satellite [Msun]
-msat: 3
+msat: 10
 
 # Satellite model: (Plummer = 0, Hernquist = 1, NFW = 2)
-satmodel: 1
+satmodel: 0
 
 #Virial radius of the satellite [kpc]
-rvirsat: 121.25
+rvirsat: 0.0
 
 #concentration parameter of the satellite
 csat: 0.0
 
 # Satellite scale radius for the Hernquist/Plummer model [kpc]
-rssat: 4.5
+rssat: 15
 
 #x-initial position of the host
 xhost: 0.0
@@ -60,32 +60,32 @@ vyhost: 0.0
 vzhost: 0.0
 
 # hostmodel (NFW=0), (Hernquist=1)
-hostmodel: 1
+hostmodel: 0
 
 #Mass of the dark matter halo of the host
-mhost: 155
+mhost: 150
 
 #Virial radius of the dark matter halo of the host, or Hernquist scale
 #length
 
-rvirhost: 279
+rvirhost: 261
 
-rshost: 40.85
+rshost: 26.47
 
 #concentration of the dark matter halo of the host
-chost: 15.0
+chost: 9.86
 
 #Mass of the disk of the host
-mdisk: 5.78
+mdisk: 5.5
 
 #Disk a parameter (following Binney & Tremaine notation)
-adisk: 2.9
+adisk: 3.5
 
 #Disk b parameter (following Binney & Tremaine notation)
 bdisk: 0.53
 
 #Mass of the bulge of the host
-mbulge: 1.4
+mbulge: 1
 
 #Scale length of the bulge
 rhdisk: 0.7
@@ -110,7 +110,7 @@ hostdf: 0
 
 # Time of integration in Gyrs
 
-time: 3.0
+time: 6.0
 
 # Forward integration (-1), backwards integration(1)
 

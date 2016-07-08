@@ -9,7 +9,8 @@ def coulomb_log(r, alpha):
     bmax = r # position of test particle at a given time
     # k = softening length if the satellite is modeled with a plummer
     # profile. See http://adsabs.harvard.edu/abs/2007ApJ...668..949B
-    k = 3.0  #kpc
+    k = 3.0 #kpc
+    #k = rs_sat
     bmin = 1.4 * k
     L = bmax / bmin
     # alpha is for make the dynamical friction more realistic.
@@ -18,7 +19,7 @@ def coulomb_log(r, alpha):
 
 # Coulomb Logarithm from Van Der Marel et al 2013. Eq A1
 def coulomb_v_log(L, r, alpha_v, a, C):
-    l = np.log10(r/(C*a))**alpha_v
+    l = np.log(r/(C*a))**alpha_v
     x = [l, L]
     return np.max(x)
 
@@ -64,7 +65,7 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
          Coulomb = coulomb_log(r, alpha)
     elif (cl==1):
          Coulomb = coulomb_v_log(L, r, alpha, rs_sat ,C)
-    s = sigma(c, r, M1.value, Rv)
+    s = sigma(c, r, M1.value - M_disk - M_bulge, Rv)
     X = v / ( np.sqrt(2.0) * s)
     # Main equation
     a_dfx = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vx)/v**3.0
