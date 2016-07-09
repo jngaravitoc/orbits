@@ -10,7 +10,7 @@ contra_out = np.loadtxt(contra_output)
 r_f = contra_out[:,1] * 3.*Rvir_host
 rho_f = contra_out[:,5] * M_host / Rvir_host**3.0
 
-pot_i = -1.72
+pot_i = 0.
 dpot_i = 0.
 
 def poisson_solver(pot_i, dpot_i, dr, r, rho):
@@ -18,7 +18,7 @@ def poisson_solver(pot_i, dpot_i, dr, r, rho):
     dpot = np.zeros(len(rho))
     pot_ac[0] = pot_i
     dpot[0] = dpot_i
-    for i in range(len(rho)):
+    for i in range(1,len(rho)):
         pot_ac[i] = pot_ac[i-1] + dr*dpot[i-1]
         dpot[i] = dpot[i-1] + dr*(4*np.pi*G.value*rho[i] - 2./r[i]*dpot[i-1])
     return dpot
