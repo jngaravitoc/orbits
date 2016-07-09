@@ -8,28 +8,32 @@ from astropy import units, constants
 from profiles import *
 from parameters import *
 from dynamical_friction import *
+from adiabatic_contraction import *
+
 
 #Function that computes the satellite acceleration
-
 def acc_sat(x, y, z, vx, vy, vz):
-    # Acceleration by the DM halo profile
-    if (Host_model == 0):
-        # Put if condition here for AC
-        ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
-    elif (Host_model == 1):
-        ahalo = a_hernquist(rs_host, x, y, z, M_host)
-
-    adisk = a_mn(a_disk, b_disk, x, y, z, M_disk)
-    abulge = a_hernquist(rh, x, y, z, M_bulge)
-
-    ax = ahalo[0] + adisk[0] + abulge[0]
-    ay = ahalo[1] + adisk[1] + abulge[1]
-    az = ahalo[2] + adisk[2] + abulge[2]
     r = np.sqrt(x**2 + y**2 + z**2)
+    # Acceleration by the DM halo profile
+    if (r<=Rvir_host):
+        if (ac == 1):
+            ahalo = acc_ac(x, y, z)
+        else:
+            if (Host_model == 0):
+                # Put if condition here for AC
+                ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
+            elif (Host_model == 1):
+                ahalo = a_hernquist(rs_host, x, y, z, M_host)
 
-    # Truncating the halo at r_vir:
-    # Dynamical Friction inside the r_vir
-    if (r <= Rvir_host):
+        adisk = a_mn(a_disk, b_disk, x, y, z, M_disk)
+        abulge = a_hernquist(rh, x, y, z, M_bulge)
+
+        ax = ahalo[0] + adisk[0] + abulge[0]
+        ay = ahalo[1] + adisk[1] + abulge[1]
+        az = ahalo[2] + adisk[2] + abulge[2]
+
+        # Truncating the halo at r_vir:
+        # Dynamical Friction inside the r_vir
         a_dfx, a_dfy, a_dfz = df(x, y, z, vx, vy, vz, M_host, M_sat, \
                               Rvir_host, c_host, alpha_df_sat)
         Ax = ax + a_dfx

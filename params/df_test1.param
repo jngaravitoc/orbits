@@ -7,7 +7,7 @@
 # output file path
 path: ../data/lmc/
 # output filename
-filename: lmc1_Herndf_vdm_cl2-7
+filename: lmc1_Herndf_vdm_cl2-8
 #x-initial position of the satellite [kpc]
 xsat: -1
 
@@ -108,10 +108,14 @@ cvalue: 1.22
 #Dynamical friction for the host (no=0, yes=1)
 hostdf: 0
 
-# Time of integration in Gyrs
+# Adiabatic Contraction (off=0, on=1))
+ac: 1
 
-time: 6.0
+# contra output file
+contraout: contra_format.txt
+
+# Time of integration in Gyrs
+time: 3.0
 
 # Forward integration (-1), backwards integration(1)
-
 direction: 1

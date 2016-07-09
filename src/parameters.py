@@ -63,6 +63,8 @@ alpha_df_host = float(ConfigSectionMap("params")['alphahost'])
 L = float(ConfigSectionMap("params")['lvalue'])
 C = float(ConfigSectionMap("params")['cvalue'])
 Host_df = float(ConfigSectionMap("params")['hostdf'])
+ac = float(ConfigSectionMap("params")['ac'])
+contra_output = str(ConfigSectionMap("params")['contraout'])
 time = float(ConfigSectionMap("params")['time'])
 direction = float(ConfigSectionMap("params")['direction'])
 
