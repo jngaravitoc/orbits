@@ -1,0 +1,121 @@
+############################################
+# Inpute parameter file, please do not change
+# the description of the parameter neither
+# the name of the value.
+###########################################
+[params]
+# output file path
+path: ../data/lmc/
+# output filename
+filename: facundo_mw2_lmc2_ac
+#x-initial position of the satellite [kpc]
+xsat: -1
+
+#y-initial position of the satellite [kpc]
+ysat: -41
+
+#z-initial position of the satellite [kpc]
+zsat: -28
+
+#vx-initial velocity of the satellite [km/s]
+vxsat:  -57
+
+#vy-initial velocity of the satellite [km/s]
+vysat: -226
+
+#vz-initial velocity of the satellite [km/s]
+vzsat: 221
+
+#Dark matter mass of the halo satellite [Msun]
+msat: 5
+
+# Satellite model: (Plummer = 0, Hernquist = 1, NFW = 2)
+satmodel: 0
+
+#Virial radius of the satellite [kpc]
+rvirsat: 0.0
+
+#concentration parameter of the satellite
+csat: 0.0
+
+# Satellite scale radius for the Hernquist/Plummer model [kpc]
+rssat: 11
+
+#x-initial position of the host
+xhost: 0.0
+
+#y-initial position of the host
+yhost: 0.0
+
+#z-initial position of the host
+zhost: 0.0
+
+#vx-initial velocity of the host
+vxhost: 0.0
+
+#vy-initial velocity of the host
+vyhost: 0.0
+
+#vz-initial velocity of the host
+vzhost: 0.0
+
+# hostmodel (NFW=0), (Hernquist=1)
+hostmodel: 0
+
+#Mass of the dark matter halo of the host
+mhost: 150
+
+#Virial radius of the dark matter halo of the host, or Hernquist scale
+#length
+
+rvirhost: 299
+
+rshost: 31.27
+
+#concentration of the dark matter halo of the host
+chost: 9.56
+
+#Mass of the disk of the host
+mdisk: 5.5
+
+#Disk a parameter (following Binney & Tremaine notation)
+adisk: 3.5
+
+#Disk b parameter (following Binney & Tremaine notation)
+bdisk: 0.53
+
+#Mass of the bulge of the host
+mbulge: 1
+
+#Scale length of the bulge
+rhdisk: 0.7
+
+#Fixed Host(0) at a point [0,0,0] , Free Host(1)
+hostmove: 1
+
+#Choose coulomb logarithm (0) Besla 07, (1) Van Der Marel e.a 2013
+coulombl: 0
+
+#Dynamical friction alpha parameter for both Besla07 and VDM 2013
+alphasat: 1.0
+alphahost: 1.0
+
+# L constant in the Van Der Marel Coulomb Logarithm
+lvalue: 0
+# C constant in the Van der Marel Coulomb Logarithm
+cvalue: 1.22
+
+#Dynamical friction for the host (no=0, yes=1)
+hostdf: 0
+
+# Adiabatic Contraction (off=0, on=1))
+ac: 1
+
+# contra output file
+contraout: contra_format.txt
+
+# Time of integration in Gyrs
+time: 8.0
+
+# Forward integration (-1), backwards integration(1)
+direction: 1
