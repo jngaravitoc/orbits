@@ -13,8 +13,8 @@ G = G.to(units.kpc**3/units.Gyr**2.0/units.Msun)
 contra_out = np.loadtxt(contra_output)
 r_f = contra_out[:,1] * Rvir_host
 rho_f = contra_out[:,5] * M_host / Rvir_host**3.0
-pot_i = -167300.72
-dpot_i = 7807.67
+pot_i = -1600.72
+dpot_i = 7.67
 
 f1 = interpolate.interp1d(r_f, rho_f)
 r_grid = np.linspace(1, Rvir_host, 1e6)

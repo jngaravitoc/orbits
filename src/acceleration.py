@@ -20,7 +20,6 @@ def acc_sat(x, y, z, vx, vy, vz):
             ahalo = acc_ac(x, y, z)
         else:
             if (Host_model == 0):
-                # Put if condition here for AC
                 ahalo = a_NFWnRvir(c_host, x, y, z, M_host, Rvir_host)
             elif (Host_model == 1):
                 ahalo = a_hernquist(rs_host, x, y, z, M_host)
