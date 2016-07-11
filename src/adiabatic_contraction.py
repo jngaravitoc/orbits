@@ -4,26 +4,33 @@ from scipy import interpolate
 from parameters import *
 from profiles import *
 
+
 # Reading contra output file
 contra_out = np.loadtxt(contra_output)
 
 r_f = contra_out[:,1] * 3.*Rvir_host
 rho_f = contra_out[:,5] * M_host / Rvir_host**3.0
 
-pot_i = 0.
-dpot_i = 0.
+pot_i = 1100000000.
+dpot_i = 10.
 
-def poisson_solver(pot_i, dpot_i, dr, r, rho):
-    pot_ac = np.zeros(len(rho))
-    dpot = np.zeros(len(rho))
-    pot_ac[0] = pot_i
-    dpot[0] = dpot_i
-    for i in range(1,len(rho)):
-        pot_ac[i] = pot_ac[i-1] + dr*dpot[i-1]
-        dpot[i] = dpot[i-1] + dr*(4*np.pi*G.value*rho[i] - 2./r[i]*dpot[i-1])
-    return dpot
+f1 = interpolate.interp1d(r_f, rho_f)
+r_grid = np.linspace(1, Rvir_host, 1E6)
+dr = r_grid[1] - r_grid[0]
+rho_grid = f1(r_grid)
+
+pot_ac = np.zeros(len(rho_grid))
+dpot = np.zeros(len(rho_grid))
+pot_ac[0] = pot_i
+dpot[0] = dpot_i
+for i in range(1,len(rho_grid)):
+    pot_ac[i] = pot_ac[i-1] + dr*dpot[i-1]
+    dpot[i] = dpot[i-1] + dr*(4.*np.pi*G.value*rho_grid[i] - 2./r_grid[i]*dpot[i-1])
 
 
+# 
+def rho_ac(r):
+    return f1(r)
 
 # Returns the acceleration taking into account adiabatic contraction.
 def acc_ac(x, y, z):
@@ -45,14 +52,7 @@ def acc_ac(x, y, z):
         print 'Warning: computing the acceleration with AC outside Rvir'
         sys.exit()
 
-    f1 = interpolate.interp1d(r_f, rho_f)
-    r_grid = np.linspace(1, Rvir_host, 1E6)
-    dr = r_grid[1] - r_grid[0]
-    rho_grid = f1(r_grid)
-
-    d_pot = poisson_solver(pot_i, dpot_i, dr, r_grid, rho_grid)
-
-    f2 = interpolate.interp1d(r_grid, d_pot)
+    f2 = interpolate.interp1d(r_grid, dpot)
     d_pot2 = f2(r_eval)
 
     theta = np.arccos(z/r_eval)

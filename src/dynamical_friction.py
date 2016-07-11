@@ -3,6 +3,7 @@ from scipy.special import erf
 from astropy import units, constants
 from profiles import *
 from parameters import *
+from adiabatic_contraction import rho_ac
 
 # Coulomb Logarithm definition:
 def coulomb_log(r, alpha):
@@ -47,9 +48,13 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     v = np.sqrt(vx**2.0 + vy**2.0 + vz**2.0)
     v = v * units.kpc / units.Gyr
     # Density of the NFW at a given r
-    if (Host_model == 0):
+    if (ac==1):
+        rho = rho_ac(r) # using the adiabatic contraction interpolated density
+        #rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
+
+    elif ((Host_model == 0) & (ac==0)) :
         rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
-    elif (Host_model == 1):
+    elif ((Host_model == 1) & (ac==0)):
         rho = dens_hernquist(rs_host, x, y, z, M1)
     rho = rho * units.Msun / units.kpc**3.0
     # Computing the dynamical friction
