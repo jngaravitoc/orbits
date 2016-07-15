@@ -11,15 +11,22 @@ G = G.to(units.kpc**3/units.Gyr**2.0/units.Msun)
 
 # reading contra output file
 contra_out = np.loadtxt(contra_output)
-r_f = contra_out[:,1] * Rvir_host
-rho_f = contra_out[:,5] * M_host / Rvir_host**3.0
-pot_i = -1600.72
-dpot_i = 7.67
+
+r_f = contra_out[:,0]# * Rvir_host
+rho_f = contra_out[:,5]# * M_host / Rvir_host**3.0
+
+pot_i = -168733.42
+dpot_i = -19173.85
 
 f1 = interpolate.interp1d(r_f, rho_f)
-r_grid = np.linspace(1, Rvir_host, 1e6)
+r_grid = np.linspace(r_f[0], r_f[-1], 1e5-10) #* Rvir_host
+
+rho_grid = f1(r_grid) #* M_host / Rvir_host**3.0
+
+r_grid = r_grid * Rvir_host
+rho_grid = rho_grid *  M_host / Rvir_host**3.0
+
 dr = r_grid[1] - r_grid[0]
-rho_grid = f1(r_grid)
 pot_ac = np.zeros(len(rho_grid))
 dpot = np.zeros(len(rho_grid))
 pot_ac[0] = pot_i
@@ -29,11 +36,18 @@ for i in range(1,len(rho_grid)):
     pot_ac[i] = pot_ac[i-1] + dr*dpot[i-1]
     dpot[i] = dpot[i-1] + dr*(4.*np.pi*G.value*rho_grid[i] - 2./r_grid[i]*dpot[i-1])
 
+#for i in range(len(rho_grid)):
+#   print r_grid[i], pot_ac[i], rho_grid[i], dpot[i]
 
-    
 
 def rho_ac(r):
-    return f1(r)
+    index = np.where(np.abs(r-r_grid) == min(np.abs(r-r_grid)))[0]
+    assert(len(index)==1)
+    if r>Rvir_host:
+        return 0
+    else:
+    #rho = f1(r/Rvir_host)
+    	return rho_grid[index]#_grid[index]
 
 def acc_ac(x, y, z):
     """
@@ -54,14 +68,17 @@ def acc_ac(x, y, z):
         print 'Warning: computing the acceleration with AC outside Rvir'
         sys.exit()
 
-    f2 = interpolate.interp1d(r_grid, dpot)
-    d_pot2 = f2(r_eval)
+    #f2 = interpolate.interp1d(r_grid, dpot)
+    #d_pot2 = f2(r_eval)
+    index = np.where(np.abs(r_eval-r_grid) == min(np.abs(r_eval-r_grid)))[0]
+    assert(len(index)==1)
+    d_pot2 = dpot[index]
+    #theta = np.arccos(z/r_eval)
+    #phi = np.arctan2(y, x)
 
-    theta = np.arccos(z/r_eval)
-    phi = np.arctan2(y, x)
-    ax = -d_pot2*np.sin(theta)*np.cos(phi)
-    ay = -d_pot2*np.sin(theta)*np.sin(phi)
-    az = -d_pot2*np.cos(theta)
+    ax = -d_pot2*x/r_eval#*np.sin(theta)*np.cos(phi)
+    ay = -d_pot2*y/r_eval#*np.sin(theta)*np.sin(phi)
+    az = -d_pot2*z/r_eval#*np.cos(theta)
     #print az, a_NFWnRvir(9.86, x, y, z, M_host, Rvir_host)[2], r_eval
     return ax, ay, az
 

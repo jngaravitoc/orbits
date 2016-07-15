@@ -51,7 +51,6 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     if (ac==1):
         rho = rho_ac(r) # using the adiabatic contraction interpolated density
         #rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
-
     elif ((Host_model == 0) & (ac==0)) :
         rho = dens_NFWnRvir(c, x, y, z, M1, Rv)
     elif ((Host_model == 1) & (ac==0)):
@@ -66,16 +65,19 @@ def df(x, y, z, vx, vy, vz, M1, M2, Rv, c, alpha):
     vz = vz * units.kpc / units.Gyr
     M2 = M2 * units.Msun
     M1 = M1 * units.Msun
+
+    print rho, r
     if (cl==0):
          Coulomb = coulomb_log(r, alpha)
     elif (cl==1):
          Coulomb = coulomb_v_log(L, r, alpha, rs_sat ,C)
     s = sigma(c, r, M1.value - M_disk - M_bulge, Rv)
+    #s = sigma(c, r, M1.value, Rv)
     X = v / ( np.sqrt(2.0) * s)
     # Main equation
     a_dfx = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vx)/v**3.0
     a_dfy = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vy)/v**3.0
-    a_dfz = (factor * M2 * rho * Coulomb * (erf(X.value) - 2.0 * X / (np.sqrt(np.pi)) * np.exp(-X**2.0)) * vz) / v**3.0
+    a_dfz = (factor*M2*rho*Coulomb*(erf(X.value) - 2.0*X/(np.sqrt(np.pi))*np.exp(-X**2.0))*vz)/v**3.0
     # Conversion to the correct units
     a_dfx = a_dfx.to(units.kpc / units.Gyr**2.0)
     a_dfy = a_dfy.to(units.kpc / units.Gyr**2.0)
