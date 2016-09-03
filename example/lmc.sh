@@ -55,4 +55,7 @@
 
 #python ../src/main.py df_test1.param
 #python ../src/main.py df_test2.param
-python ../src/main.py df_test3.param
+#python ../src/main.py df_test3.param
+
+
+python ../src/main.py gomez15fig1.param
