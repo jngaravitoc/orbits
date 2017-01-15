@@ -68,7 +68,7 @@ contra_output = str(ConfigSectionMap("params")['contraout'])
 time = float(ConfigSectionMap("params")['time'])
 direction = float(ConfigSectionMap("params")['direction'])
 
-out_param = open(path + input_param + "-savedvalues", "w")
+out_param = open(path + filename + "-savedvalues", "w")
 out_param.write("xsat%f \n"%(x_sat))
 out_param.write("ysat%f \n"%(y_sat))
 out_param.write("zsat%f \n"%(z_sat))
